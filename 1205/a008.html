@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .focus {
+                background-color: coral;
+            }
+            .reset {
+                background-color: white;
+            }
+            span {
+                font-family: 標楷體;
+                font-size: 25px;
+            }
+        </style>
+        <script>
+            function initial() {
+                let string_one = (document.getElementById("string_one").innerHTML = `解題教學<br><br>`);
+                let string_two = (document.getElementById("string_two").innerHTML = `第一步 : 先找出長與寬，可以發現圖形甲與圖形乙的長與寬是相同的，長為4cm，寬為4cm<br><br>`);
+                let string_three = (document.getElementById("string_three").innerHTML = `第二步 : 面積的公式為 - > 長 乘以 寬，所以甲與乙的面積會相同<br><br>`);
+                let string_four = (document.getElementById("string_four").innerHTML = `第三步 : 用公式計算出長方形與平行四邊形面積 -> 面積 = 4cm * 4cm = 16cm ^ 2<br><br>`);
+            }
+            let css = ["focus", "reset"];
+            let count_step = 1;
+
+            function step() {
+                switch (count_step) {
+                    case 1:
+                        document.getElementById("string_one").classList.add(css[0]);
+                        count_step++;
+                        break;
+                    case 2:
+                        document.getElementById("string_one").classList.remove(css[0]);
+                        document.getElementById("string_two").classList.add(css[0]);
+                        drawLines();
+                        count_step++;
+                        break;
+                    case 3:
+                        document.getElementById("string_two").classList.remove(css[0]);
+                        document.getElementById("string_three").classList.add(css[0]);
+                        count_step++;
+                        break;
+                    case 4:
+                        document.getElementById("string_three").classList.remove(css[0]);
+                        document.getElementById("string_four").classList.add(css[0]);
+                        count_step++;
+                        break;
+                    case 5:
+                        document.getElementById("string_four").classList.remove(css[0]);
+                        alert("本題教學結束~");
+                        break;
+                }
+            }
+            function drawLines() {
+                let canvas = document.getElementById("myCanvas");
+                let print = canvas.getContext("2d");
+
+                // 繪製斜率為 45° 的直線
+                // 
+                print.beginPath();
+                // 2, 2 - 2, 6
+                print.moveTo(2 * 25 + 5, 2 * 25 - 5);
+                print.lineTo(2 * 25, 2 * 25);
+                print.lineTo(6 * 25, 2 * 25);
+                print.lineTo(6 * 25 - 5, 2 * 25 - 5);
+                print.strokeStyle = "	#00AEAE";
+                print.stroke();
+
+                print.beginPath();
+                // 2, 2 - 2, 6
+                print.moveTo(2 * 25 - 5, 2 * 25 + 5);
+                print.lineTo(2 * 25, 2 * 25);
+                print.lineTo(2 * 25, 6 * 25);
+                print.lineTo(2 * 25 - 5, 6 * 25 - 5);
+                print.strokeStyle = "	#0080FF";
+                print.stroke();
+
+                print.font = "16px Arial";
+                print.fillText("4 cm", 100 - 12.5, 50 - 12.5);
+                print.fillText("4 cm", 12.5, 100 + 7);
+                // draw 乙 
+                    // test(9, 2)
+                // print.beginPath();
+                // print.moveTo(8 * 25, 2 * 25);
+                // print.lineTo(10 * 25, 2 * 25);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(8 * 25, 6 * 25);
+                // print.lineTo(10 * 25, 6 * 25);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(9 * 25, 2 * 25);
+                // print.lineTo(9 * 25, 6 * 25);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(9 * 25, 2 * 25);
+                // print.lineTo(9 * 25 - 5, 2 * 25 + 5);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(9 * 25, 6 * 25);
+                // print.lineTo(9 * 25 - 5, 6 * 25 - 5);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // // Text
+                // print.font = "16px Arial";
+                // print.fillStyle = "#00AEAE";
+                // print.fillText("4cm", 9 * 25, 4 * 25);
+                // // print.fillText("乙", 265, 110);
+
+                // print.beginPath();
+                // print.moveTo(14 * 25 - 5, 2 * 25 - 5);
+                // print.lineTo(14 * 25, 2 * 25);
+                // print.lineTo(10 * 25, 2 * 25);
+                // print.lineTo(10 * 25 + 5, 2 * 25 - 5);
+                // print.strokeStyle = "#FF79BC	";
+                // print.stroke();
+                
+                // print.font = "16px Arial";
+                // print.fillText("4 cm", 12 * 25 - 12, 2 * 25);
+            }
+        </script>
+    </head>
+    <body onload="initial();">
+
+        <canvas id="myCanvas" width="500" height="200" style="border:1px solid #000;"></canvas>
+        <hr />
+
+        <!-- Section for 解題教學 -->
+        <button onclick="step();">step</button>
+        <span id="string_one"></span>
+        <span id="string_two"></span>
+        <span id="string_three"></span>
+        <span id="string_four"></span>
+        
+
+        <!-- Section for Canvas -->
+        <script>
+            let canvas = document.getElementById("myCanvas");
+            let print = canvas.getContext("2d");
+
+            // Picture one
+            print.fillStyle = "#fffacd";
+            print.fillRect(50, 50, 100, 100);
+
+            // Picture two
+            print.moveTo(250, 50);
+            print.lineTo(200, 150);
+            print.lineTo(300, 150);
+            print.lineTo(350, 50);
+            print.fill();
+
+            // Grid lines
+            print.strokeStyle = "#cccccc";
+            for (let i = 25; i <= 400; i += 25) {
+                print.beginPath();
+                print.moveTo(i, 50);
+                print.lineTo(i, 150);
+                print.stroke();
+            }
+            for (let j = 50; j <= 150; j += 25) {
+                print.beginPath();
+                print.moveTo(25, j);
+                print.lineTo(400, j);
+                print.stroke();
+            }
+
+            // Text
+            print.font = "20px Arial";
+            print.fillStyle = "#000000";
+            print.fillText("甲", 90, 110);
+            print.fillText("乙", 265, 110);
+
+            // Draw brackets
+            print.beginPath();
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // Right bracket
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // Upward arc
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            // test
+            // // 繪製斜率為 45° 的直線
+            // print.beginPath();
+            // print.moveTo(25 * 6, 50); // 起始點 (0, 0)
+            // print.lineTo(25 * 6 - 5, 45); // 終點 (100, 100)，斜率為 45°，所以 y = x
+            // print.strokeStyle = "#000000"; // 顏色為黑色
+            // print.stroke();
+            // test (10, 2) - (14, 2)
+            
+            // print.beginPath();
+            // print.moveTo(50, 50); // 起始點 (0, 0)
+            // print.lineTo(50 + 5, 50 - 5); // 終點 (100, 100)，斜率為 45°，所以 y = x
+            // print.strokeStyle = "#000000"; // 顏色為黑色
+            // print.stroke();
+
+            
+
+            // Additional text
+            print.font = "16px Arial";
+            print.fillText("1 cm", 16 * 25 + 12.5, 6 * 25 - 5);
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+
+            
+
+            
+        </script>
+    </body>
+</html>

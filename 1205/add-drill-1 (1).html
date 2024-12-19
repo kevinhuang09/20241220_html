@@ -1,0 +1,34 @@
+<html>
+<script>
+var n1,n2,prob="",sc=0, wrong="";
+function check(){
+  var ans=parseInt(document.getElementById('ans').value);  
+  var msg;
+  if (ans==n1+n2)
+    {  sc+=10;//sc=sc+10; 
+      msg="Great!";}
+  else
+   { wrong=wrong+prob+"<br>"; msg="Incorrect!";}
+  document.getElementById('fb').innerHTML=msg+" scores:"+sc;
+}
+function genq(){
+  var showp=document.getElementById('prob');
+  n1=parseInt(Math.random()*10);
+  n2=parseInt(Math.random()*10);
+  prob=n1+"+"+n2+"=";
+   showp.innerHTML=prob;
+}
+function mistake(){
+  var showerr=document.getElementById('error');
+   showerr.innerHTML=wrong;
+}
+</script>
+<body onload="genq();">
+<span id=prob>a+b= </span><input type="text" id="ans"  size=3> 
+<button onclick=" check();">check </button> 
+<button onclick="genq();">next </button><br>
+ <p id=fb></p>
+ <button onclick="mistake();">show mistake </button><hr>
+<p id=error></p>
+</body>
+</html>

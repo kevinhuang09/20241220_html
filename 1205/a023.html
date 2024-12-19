@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逐步顯示字串</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            font-size: 1.5em;
+            color: #333;
+        }
+    </style>
+</head>
+<body onload = "initial();">
+    <h1>逐步顯示字串</h1>
+    <p id="output"></p>
+
+    <script>
+        let string = "今天你好啊 <<，歡迎來到測驗回顧。您=的作答情況為'"; // 要逐步顯示的字串
+        function initial(){
+            display_string(string);
+        }
+        function display_string(total_string) {
+            let output = document.getElementById("output");
+            let currentIndex = 0;
+
+            // 使用 setInterval 每 0.1 秒顯示一個字元
+            let interval = setInterval(() => {
+                if (currentIndex < total_string.length) {
+                    // 顯示字串中的一個字元
+                    output.textContent += total_string[currentIndex];
+                    currentIndex += 1; // 移動到下一個字元
+                } else {
+                    // 當字串顯示完後清除 interval
+                    clearInterval(interval);
+                }
+            }, 100); // 每 100 毫秒執行一次（0.1秒）
+        }
+
+    </script>
+</body>
+
+</html>

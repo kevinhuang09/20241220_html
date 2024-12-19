@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <canvas id="myCanvas" width="500" height="200" style="border:1px solid #000;"></canvas>
+        <script>
+            let canvas = window.document.getElementById("myCanvas");
+            let print = canvas.getContext("2d");
+
+            // picture one
+            print.fillStyle = "#fffacd";
+            print.fillRect(50, 50, 100, 100);
+
+            // picture two
+            print.moveTo(250, 50);  
+            print.lineTo(200, 150);
+            // 8, 6
+            
+            // print.lineTo(275, 100);
+            print.lineTo(300, 150);
+            print.lineTo(350, 50);
+            print.fill();
+
+            print.strokeStyle = "#cccccc";
+            // 左右
+            for(let i = 25; i <= 400; i += 25){
+                print.beginPath();
+                print.moveTo(i, 50);
+                print.lineTo(i, 150);
+                print.stroke(); 
+            }
+            // 上下
+            for(let j = 50; j <= 150; j += 25){
+                print.beginPath();
+                print.moveTo(25, j);
+                print.lineTo(400, j);
+                print.stroke();
+            }
+            // picture one
+            
+            print.font = "20px Arial";
+            print.fillStyle = "#000000";
+            print.fillText("甲", 90, 110);
+            
+            // picture two
+            
+            // 275, 100
+            print.font = "20px Arial";
+            print.fillStyle = "#00000";
+            print.fillText("乙", 265, 110);
+
+
+                        // 繪製括號
+            print.beginPath();
+            // print.arc(16 * 25 - 10, 6 * 25, 10, 0.5 * Math.PI, 1.5 * Math.PI); // 左括號
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // 右括號
+            // print.arc(16 * 25, 6 * 25 + 12.5, 10, 0.5 * Math.PI, 1.5 * Math.PI); // 下括號
+            // print.arc(16 * 25, 6 * 25 + 12.5, 10, Math.PI, 2 * Math.PI); // 下括號圓弧朝下
+            
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // 下括號圓弧朝上
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+
+            print.font = "16px Arial";
+            print.fillText("1 cm", 16 * 25 + 12.5, 6 * 25 - 5);
+
+            print.font = "16px Arial";
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+            
+            
+        </script> 
+    </body>
+</html>

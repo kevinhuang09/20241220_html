@@ -1,0 +1,18 @@
+<!DOCTYPE h
+<html>
+    <script>
+        function show(){
+            let first_name = document.getElementById("first_name").value;
+            let second_name = document.getElementById("second_name").value;
+            let result = document.getElementById("show_area");
+
+            result.innerHTML = `Hello, ${first_name} ${second_name}`;
+        }
+    </script>
+    <form>
+        First name: <input type = "text" id = "first_name"><br>
+        Second name: <input type = "text" id = "second_name"><br>
+        <input type = "button" value = "show" onclick = "show();">
+    </form>
+    <p id = "show_area"></p>
+</html>

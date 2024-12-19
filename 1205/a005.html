@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas 繪製範例</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="300" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+        // 初始化畫布
+        const canvas = document.getElementById("myCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // 繪製黃色背景方形
+        ctx.fillStyle = "#fffacd"; // 使用淡黃色
+        ctx.fillRect(50, 50, 100, 100); // x, y, 寬度, 高度
+
+        // 繪製網格線
+        ctx.strokeStyle = "#cccccc"; // 淺灰色線條
+        for (let i = 50; i <= 150; i += 25) { // 垂直線條
+            ctx.beginPath();
+            ctx.moveTo(i, 50);
+            ctx.lineTo(i, 150);
+            ctx.stroke();
+        }
+        for (let j = 50; j <= 150; j += 25) { // 水平線條
+            ctx.beginPath();
+            ctx.moveTo(50, j);
+            ctx.lineTo(150, j);
+            ctx.stroke();
+        }
+
+        // 繪製「甲」字
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "#000000"; // 黑色文字
+        ctx.fillText("甲", 90, 100); // x, y
+    </script>
+</body>
+</html>

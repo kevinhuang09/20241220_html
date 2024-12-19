@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>限時作答挑戰(隨機出題)</title>
+    </head>
+    <script>
+        let the_problem_counter = 0;
+        function initial() {
+            let the_count_of_problem = document.getElementById("the_count_of_problem");
+            the_problem_counter++;
+            the_count_of_problem.innerHTML = `第${the_problem_counter}題`;
+        }
+
+        function problem_one_area_comparison() {
+            let baseArea = Math.floor(Math.random() * 50) + 10;
+            let rectangles = [];
+            let hasCorrectAnswer = false;
+
+            for (let i = 0; i < 3; i++) {
+                let length = Math.floor(Math.random() * 10) + 1;
+                let width = Math.floor(Math.random() * 10) + 1;
+                let area = length * width;
+                rectangles.push({ length, width, area });
+
+                if (area < baseArea) {
+                    hasCorrectAnswer = true;
+                }
+            }
+
+            if (!hasCorrectAnswer) {
+                let randomIndex = Math.floor(Math.random() * 3);
+                let rect = rectangles[randomIndex];
+                let newArea = baseArea - Math.floor(Math.random() * 5) - 1;
+                rect.area = newArea;
+                rect.length = Math.floor(newArea / 2);
+                rect.width = newArea - rect.length;
+            }
+
+            document.getElementById("one_type").innerHTML = 
+                `以下矩形的長和寬中，哪些面積小於 ${baseArea}?`;
+
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            for (let i = 0; i < rectangles.length; i++) {
+                let rect = rectangles[i];
+                checkboxes[i].value = rect.area < baseArea ? "true" : "false";
+                checkboxes[i].checked = false;
+                checkboxes[i].nextSibling.nodeValue = 
+                    ` 長: ${rect.length} cm, 寬: ${rect.width} cm`;
+            }
+        }
+
+        function check_problem_one_answer() {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            let feedback = document.getElementById("feedback_five");
+            let allCorrect = true;
+            let answered = false;
+
+            for (let checkbox of checkboxes) {
+                if (checkbox.checked) {
+                    answered = true;
+                    if (checkbox.value !== "true") {
+                        allCorrect = false;
+                    }
+                } else if (checkbox.value === "true") {
+                    allCorrect = false;
+                }
+            }
+
+            if (!answered) {
+                feedback.innerHTML = "請至少選擇一個答案！";
+            } else if (allCorrect) {
+                feedback.innerHTML = "正確！";
+            } else {
+                feedback.innerHTML = "錯誤！請再試一次！";
+            }
+        }
+    </script>
+    <body onload="initial(); problem_one_area_comparison();">
+        <table border="3">
+            <tr>
+                <td>
+                    <span id="the_count_of_problem"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span id="one_type"></span><br>
+                    <label><input type="checkbox"> </label><br>
+                    <label><input type="checkbox"> </label><br>
+                    <label><input type="checkbox"> </label><br>
+                    <button onclick="check_problem_one_answer();">確定</button>
+                    <span id="feedback_five"></span>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

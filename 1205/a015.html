@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>限時作答挑戰(隨機出題)</title>
+    </head>
+    <script>
+        let the_problem_counter = 0;
+        let random_number;
+        function initial(){
+            let the_count_of_problem = document.getElementById("the_count_of_problem");
+            the_problem_counter++;
+            the_count_of_problem.innerHTML = `第${the_problem_counter}題`
+        }
+        function generate_random_number(){
+            // 1 ~ 5
+            random_number = Math.floor(Math.random() * 1) + 1;
+            // alert(number);   
+            return random_number;
+        }
+        function judge_the_problem(){
+            switch(random_number){
+                case 1: 
+                    // alert("1");
+                    problem_one();
+                    break;
+                case 2: 
+                    alert("2");
+                    break;
+                case 3: 
+                    alert("3");
+                    break;
+                case 4: 
+                    alert("4");
+                    break;
+                case 5: 
+                    alert("5");
+                    break;
+            }
+        }
+        // 題型1
+        function problem_one() {
+            let random_number1 = Math.floor(Math.random() * 10) + 1; // 隨機底
+            let random_number2 = Math.floor(Math.random() * 10) + 1; // 隨機高
+            let correctAnswer = random_number1 * random_number2; // 正確答案
+
+            // 生成兩個錯誤答案
+            let wrongAnswer1 = correctAnswer + Math.floor(Math.random() * 10) + 1;
+            let wrongAnswer2 = correctAnswer - Math.floor(Math.random() * 5) - 1;
+
+            // 確保錯誤答案不等於正確答案
+            while (wrongAnswer1 === correctAnswer || wrongAnswer1 === wrongAnswer2) {
+                wrongAnswer1 = correctAnswer + Math.floor(Math.random() * 10) + 1;
+            }
+            while (wrongAnswer2 === correctAnswer || wrongAnswer2 === wrongAnswer1) {
+                wrongAnswer2 = correctAnswer - Math.floor(Math.random() * 5) - 1;
+            }
+
+            // 將正確答案與錯誤答案隨機排列
+            let options = [
+                { value: correctAnswer, isCorrect: true },
+                { value: wrongAnswer1, isCorrect: false },
+                { value: wrongAnswer2, isCorrect: false },
+            ];
+            options.sort(() => Math.random() - 0.5); // 隨機排序
+
+            // 更新題目描述
+            document.getElementById("one_type").innerHTML = 
+                `有一個平行四邊形的圖形，底為${random_number1}cm，高為${random_number2}cm，請問此平行四邊形的面積為多少?`;
+
+            // 更新選項
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            for (let i = 0; i < options.length; i++) {
+                checkboxes[i].value = options[i].value;
+                checkboxes[i].nextSibling.nodeValue = `${options[i].value}cm^2`; // 更新文字
+                checkboxes[i].dataset.isCorrect = options[i].isCorrect; // 標記正確答案
+            }
+        }
+        function correct_problem_five() {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            let feedback = document.getElementById("feedback_five");
+            let isCorrect = false;
+
+            for (let checkbox of checkboxes) {
+                if (checkbox.checked && checkbox.dataset.isCorrect === "true") {
+                    isCorrect = true;
+                    break;
+                }
+            }
+
+            feedback.innerHTML = isCorrect ? "正確！" : "錯誤！請再試一次！";
+        }
+
+    </script>
+    <body onload = "initial();generate_random_number();judge_the_problem();">
+        <table border = "3">
+            <tr>
+                <td>
+                    <span id = "the_count_of_problem"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- span>有一個平行四邊形的圖形，底為5cm，高為9cm，請問此平行四邊形的面積為多少?</span><br>
+                      -->
+                    <span id = "one_type"></span>
+                    <label><input type = "checkbox" value = "A">35cm^2</label><br>
+                    <label><input type = "checkbox" value = "B">45cm^2</label><br>
+                    <label><input type = "checkbox" value = "C">55cm^2</label><br>
+                    <button id="button_five" onclick="correct_problem_five();">確定</button>
+                    <span id="feedback_five"></span>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>多題測試</title>
+    <script>
+        // 定義正確答案的對應映射
+        const correctAnswers = {
+            "question_one": ["A", "B"],
+            "question_two": ["B"]
+        };
+
+        function correct_one(questionId) {
+            // 獲取該題的所有選項
+            let questionOptions = document.querySelectorAll(`#${questionId} input[type="checkbox"]`);
+
+            // 獲取選中的選項
+            let selectedOptions = Array.from(questionOptions)
+                .filter(option => option.checked)
+                .map(option => option.value);
+
+            // 獲取回饋區域
+            let feedbackElement = document.querySelector(`#${questionId} .feedback`);
+
+            // 獲取該題的按鈕
+            let buttonElement = document.querySelector(`#${questionId} button`);
+
+            // 判斷是否有選擇
+            if (selectedOptions.length === 0) {
+                feedbackElement.innerHTML = "請至少選擇一個選項！";
+                return;
+            }
+
+            // 比對正確答案
+            let correct = correctAnswers[questionId].sort().join(",") === selectedOptions.sort().join(",");
+            feedbackElement.innerHTML = correct ? "答對了！" : "答錯了，請再試一次！";
+
+            // 如果答對，禁用按鈕
+            if (correct) {
+                buttonElement.disabled = true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <table border="1" style="width: 100%; border-collapse: collapse; text-align: center;">
+        <tr style="text-align: center; vertical-align: middle;">
+            <td style="width: 20%;">第四題</td>
+            <td style="width: 80%;" id="question_one">
+                <span>下列哪些底與高所構成的平行四邊形面積相同?</span><br>
+                <label><input type="checkbox" value="A">底 : 5cm, 高 : 6cm</label><br>
+                <label><input type="checkbox" value="B">底 : 19cm, 高 : 2cm</label><br>
+                <label><input type="checkbox" value="C">底 : 1cm, 高 : 30cm</label><br>
+                <button onclick="correct_one('question_one');">確定</button>
+                <span class="feedback"></span>
+            </td>
+        </tr>
+        <tr style="text-align: center; vertical-align: middle;">
+            <td style="width: 20%;">第五題</td>
+            <td style="width: 80%;" id="question_two">
+                <span>有一個平行四邊形的圖形，底為5cm，高為9cm，請問此平行四邊形的面積為多少?</span><br>
+                <label><input type="checkbox" value="A">35cm^2</label><br>
+                <label><input type="checkbox" value="B">45cm^2</label><br>
+                <label><input type="checkbox" value="C">55cm^2</label><br>
+                <button onclick="correct_one('question_two');">確定</button>
+                <span class="feedback"></span>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

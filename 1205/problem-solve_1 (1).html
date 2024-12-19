@@ -1,0 +1,101 @@
+<html>
+<style>
+ .focus{background-color: coral;}
+ .reset{color:black;}
+ #red{color:red;}
+</style>
+<script>
+var basicps=["小穎比小銘","因此要採用","計算式: ","答:"];
+var process=[,,,];
+var op=["加","減"];
+var semantic=["多","少"];
+var n1, n2, n1dif,ans;
+var questid;
+var testtype=0, opexp="";
+var stateid=0,ps0id,ps1id,ps2id,ps3id;
+function genQ(){
+  testtype=Math.floor(Math.random() *2);//0:加, 1:減
+  n1=Math.floor(Math.random() * 4) + 5;//5~5+3
+  n2=Math.floor(Math.random() * 3) + 2;//差值: 2~2+2
+  //n1dif=Math.floor(Math.random() * (n1-1)) +1;
+  //n1=8; n2=4;
+  ans=(testtype==0)?n1+n2:n1-n2;
+  opexp=(testtype==0)?n1+"+"+n2:n1+"-"+n2;
+  questid=document.getElementById("quest"); 
+  questid.innerHTML="小銘有<span id=red>"+n1+"</span>顆橘子，小穎比小銘<span id=red>"+semantic[testtype]+n2+"</span>顆，小穎有多少顆橘子?";
+}
+function genPS(){
+ var pic1="";
+ var org="<img src=orange.jpg width=50 height=50 align=middle>";
+ for (var i=0;i<n1;i++) pic1+=org;
+ pic1+="<font size=6>";
+ if (testtype==0) pic1+="+";
+ else pic1+="-";
+ pic1+="</font>";
+ for (var i=0;i<n2;i++) pic1+=org;
+ psid[0].innerHTML="因為"+basicps[0]+semantic[testtype]+n2+"顆<br>"+pic1;
+ psid[1].innerHTML=basicps[1]+op[testtype]+"法(上面橘子數一數)";
+ psid[2].innerHTML=basicps[2]+opexp+"="+ans;
+ psid[3].innerHTML=basicps[3]+ans+"顆";
+}
+ 
+var css=["focus","reset"];//skip .
+function stedps(){
+ switch (stateid){
+   case 0: psid[0].classList.add(css[0]); stateid++;break;
+           //ps0id.classList.add(css[0]);
+   case 1: psid[stateid-1].classList.remove(css[0]);
+           psid[stateid].classList.add(css[0]);
+           stateid++;
+           break;
+   case 2: psid[stateid-1].classList.remove(css[0]);
+           psid[stateid].classList.add(css[0]);
+           stateid++;
+           break;
+   case 3: psid[stateid-1].classList.remove(css[0]);
+           psid[stateid].classList.add(css[0]);
+           stateid++;
+           break;
+
+   case 4: psid[stateid-1].classList.remove(css[0]);stateid=0;break;
+   }
+}
+
+var timerid;
+function anim(){
+ timerid=setInterval(stedps,1000); //setInterval("stedps()",1000);
+ }
+function clearanim(){
+ clearInterval(timerid);
+}
+function next(){
+ window.location.reload();
+}
+var psid=[,,,];
+function initid(){
+ stateid=0
+ for(var i=0;i<=3;i++) psid[i]=document.getElementById("ps"+i); 
+ //psid[0]=document.getElementById("ps0"); 
+ //psid[1]=document.getElementById("ps1"); 
+ //psid[2]=document.getElementById("ps2"); 
+ //psid[3]=document.getElementById("ps3"); 
+ //alert("222222");
+ genQ();
+ genPS();
+ //psid[0].classList.add(css[0]);
+ //ps0id.classList.add(css[0]);
+}
+</script>
+<body onload="initid();">
+<font size=6>
+<p id="quest"></p><hr>
+<button onclick="stedps();">Step</button>
+<button onclick="anim();">animation</button>
+<button onclick="clearanim();">clear animation</button>
+<button onclick="next();">Next</button>
+<p id="ps0"></p> 
+<p id="ps1"></p> 
+<p id="ps2"></p> 
+<p id="ps3"></p> 
+</font>
+</body></html>

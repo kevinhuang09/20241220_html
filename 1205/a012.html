@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    <script>
+        function initial(){
+            // let question_one = document.getElementById("question_one").innerHTML = ``;
+            problem_one_picture();
+            problem_two_picture();
+            problem_three_one_picture();
+
+        }
+        function problem_one_picture(){
+            let canvas = document.getElementById("myCanvas1");
+            let print = canvas.getContext("2d");
+
+            // test
+            // 3, 2 10, 2 10, 4 3, 4 3, 2
+            print.beginPath();
+            print.lineWidth = 5;
+            print.moveTo(3 * 25, 2 * 25);
+            print.lineTo(10 * 25, 2 * 25);
+            print.lineTo(8 * 25, 4 * 25);
+            print.lineTo(1 * 25, 4 * 25);
+            print.lineTo(3 * 25, 2 * 25);
+            // print.lineTo(4 * 25, 3 * 25);
+            // print.lineTo(3 * 25, 2 * 25);
+            print.strokeStyle = "#8600FF";
+            print.stroke();
+            
+            print.fillStyle = "#FFD0FF";
+            print.fill();
+            print.lineWidth = 1;
+            // Grid lines
+            print.strokeStyle = "#cccccc";
+            for (let i = 25; i <= 400; i += 25) {
+                print.beginPath();
+                print.moveTo(i, 50);
+                print.lineTo(i, 150);
+                print.stroke();
+            }
+            for (let j = 50; j <= 150; j += 25) {
+                print.beginPath();
+                print.moveTo(25, j);
+                print.lineTo(400, j);
+                print.stroke();
+            }
+            print.fillStyle = "#000000";
+            print.font = "16px Arial";
+            print.fillText("1 cm", 16 * 25 + 12.5, 6 * 25 - 5);
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+            // Draw brackets
+            print.beginPath();
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // Right bracket
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // Upward arc
+            print.strokeStyle = "#000000";
+            print.stroke();
+        }
+        function problem_two_picture(){
+            let canvas = document.getElementById("myCanvas2");
+            let print = canvas.getContext("2d");
+
+            // test
+            // 1, 2 5, 2 7, 4 3, 4 1, 2
+            print.beginPath();
+            print.lineWidth = 5;
+            print.moveTo(1 * 25, 2 * 25);
+            print.lineTo(5 * 25, 2 * 25);
+            print.lineTo(7 * 25, 5 * 25);
+            print.lineTo(3 * 25, 5 * 25);
+            print.lineTo(1 * 25, 2 * 25);
+            // print.lineTo(4 * 25, 3 * 25);
+            // print.lineTo(3 * 25, 2 * 25);
+            print.strokeStyle = "#8600FF";
+            print.stroke();
+            
+            print.fillStyle = "#FFD0FF";
+            print.fill();
+            print.lineWidth = 1;
+            // Grid lines
+            print.strokeStyle = "#cccccc";
+            for (let i = 25; i <= 400; i += 25) {
+                print.beginPath();
+                print.moveTo(i, 50);
+                print.lineTo(i, 150);
+                print.stroke();
+            }
+            for (let j = 50; j <= 150; j += 25) {
+                print.beginPath();
+                print.moveTo(25, j);
+                print.lineTo(400, j);
+                print.stroke();
+            }
+            print.fillStyle = "#000000";
+            print.font = "16px Arial";
+            print.fillText("1 cm", 16 * 25 + 12.5, 6 * 25 - 5);
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+            // Draw brackets
+            print.beginPath();
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // Right bracket
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // Upward arc
+            print.strokeStyle = "#000000";
+            print.stroke();
+        }
+        function problem_three_one_picture(){
+            let canvas = document.getElementById("myCanvas3_1");
+            let print = canvas.getContext("2d");
+
+            // draw first picture
+            print.beginPath();
+            print.lineWidth = 3;
+            print.moveTo(1 * 15, 2 * 15);
+            print.lineTo(9 * 15, 2 * 15);
+            print.lineTo(10 * 15, 3 * 15);
+            print.lineTo(2 * 15, 3 * 15);
+            print.strokeStyle = "#8600FF";
+            print.stroke();
+            print.fillStyle = "#FFD0FF";
+            print.fill();
+
+            print.fillStyle = "#FFD0FF";
+            print.font = "16px Arial";
+            print.fillText("A", 1 * 15 - 7, 2 * 15 - 7);
+            print.fillText("B", 13 * 15 + 5 - 7, 2 * 15 - 7);
+            print.fillText("C", 25 * 15 + 3 + 5 - 7, 2 * 15 - 7);
+            // draw second picture
+            print.beginPath();
+            print.lineWidth = 3;
+            print.moveTo(14 * 15 + 5, 1 * 15);
+            print.lineTo(17 * 15 + 5, 1 * 15);
+            print.lineTo(22 * 15 + 5, 5 * 15);
+            print.lineTo(19 * 15 + 5, 5 * 15);
+            print.strokeStyle = "#8600FF";
+            print.stroke();
+            print.fillStyle = "#FFD0FF";
+            print.fill();
+            
+            // draw third picture
+            print.beginPath();
+            print.lineWidth = 3;
+            print.moveTo(30 * 15 + 10, 1 * 15);
+            print.lineTo(30 * 15 + 10, 4 * 15);
+            print.lineTo(26 * 15 + 10, 6 * 15);
+            print.lineTo(26 * 15 + 10, 3 * 15);
+            // print.lineTo(17 * 15 + 5, 1 * 15);
+            // print.lineTo(22 * 15 + 5, 5 * 15);
+            // print.lineTo(19 * 15 + 5, 5 *15);
+            print.strokeStyle = "#8600FF";
+            print.stroke();
+            print.fillStyle = "#FFD0FF";
+            print.fill();
+
+            print.lineWidth = 1;
+            // Grid lines
+            print.strokeStyle = "#cccccc";
+            // 15, 150 15, 100
+            for (let i = 15; i <= 150; i += 15) {
+                print.beginPath();
+                print.moveTo(i, 15);
+                print.lineTo(i, 90);
+                print.stroke();
+            }
+            for (let j = 15; j <= 100; j += 15) {
+                print.beginPath();
+                print.moveTo(15, j);
+                print.lineTo(150, j);
+                print.stroke();
+            }
+            // 200, 235 200, 185
+            for (let i = 200; i <= (200 + 150 - 15); i += 15) {
+                print.beginPath();
+                print.moveTo(i, 15);
+                print.lineTo(i, 90);
+                print.stroke();
+            }
+            for (let j = 15; j <= 100; j += 15) {
+                print.beginPath();
+                print.moveTo(200, j);
+                print.lineTo((200 + 150 - 15), j);
+                print.stroke();
+            }
+            // the three picture
+            for (let i = 385; i <= (385 + 150 - 15); i += 15) {
+                print.beginPath();
+                print.moveTo(i, 15);
+                print.lineTo(i, 90);
+                print.stroke();
+            }
+            for (let j = 15; j <= 100; j += 15) {
+                print.beginPath();
+                print.moveTo(385, j);
+                print.lineTo((385 + 150 - 15), j);
+                print.stroke();
+            }
+            // for (let j = 200; j <= 100; j += 15) {
+            //     print.beginPath();
+            //     print.moveTo(15, j);
+            //     print.lineTo(150, j);
+            //     print.stroke();
+            // }
+            print.fillStyle = "#000000";
+            print.font = "16px Arial";
+            
+            
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+            // Draw brackets
+            print.beginPath();
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // Right bracket
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // Upward arc
+            print.strokeStyle = "#000000";
+            print.stroke();
+        }
+        let check_yes_ro_no = ["correct!!!", "error!!!"];
+        function correct_problem_one(){
+            let button_one = document.getElementById("button_one");
+            button_one.disabled = true;
+            // Get all radio buttons for the first question
+            let options = document.getElementsByName("p1");
+            
+            // Find the selected radio button
+            let selectedAnswer;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    selectedAnswer = options[i].value;
+                    break;
+                }
+            }
+            
+            // Define the correct answer
+            let correctAnswer = "14"; // Assuming the correct answer is 14 based on your question
+            let feedback_one = document.getElementById("feedback_one");
+            // Check if the selected answer is correct
+            if (selectedAnswer === correctAnswer) {
+                // alert("Correct answer!");
+                feedback_one.innerHTML = `correct!!!`;
+            } else {
+                feedback_one.innerHTML = `error!!!`;
+                // alert("Incorrect answer. The correct answer is " + correctAnswer);
+            }
+        }
+        function correct_problem_two(){
+            let button_two = document.getElementById("button_two");
+            button_two.disabled = true;
+            let user_answer_two = document.getElementById("user_answer_two").value;
+            let the_correct_answer = "12";
+            let feedback_two = document.getElementById("feedback_two");
+            if(user_answer_two === the_correct_answer){
+                feedback_two.innerHTML = `${check_yes_ro_no[0]}`;
+            }
+            else{
+                feedback_two.innerHTML = `${check_yes_ro_no[1]}`;
+            }
+        }
+        function correct_problem_three() {
+            let button_three = document.getElementById("button_three");
+            button_three.disabled = true; // 禁用按鈕
+
+            // 獲取使用者選擇的值
+            let user_selected = Array.from(document.getElementById("user_answer_three").selectedOptions)
+                                    .map(option => option.value);
+
+            // 正確答案
+            let correct_answers = ["B", "C"];
+            
+            // 判斷是否有選擇
+            if (user_selected.length === 0) {
+                alert("請選擇至少一個選項！");
+                button_three.disabled = false; // 恢復按鈕可用性
+                return;
+            }
+
+            // 判斷對錯
+            let feedback = document.getElementById("feedback_three");
+            if (user_selected.sort().join(",") === correct_answers.sort().join(",")) {
+                feedback.innerHTML = `${check_yes_ro_no[0]}`;
+            } else {
+                feedback.innerHTML = `${check_yes_ro_no[1]}`;
+                        }
+        }
+
+        function correct_problem_four() {
+            let button_four = document.getElementById("button_four");
+            button_four.disabled = true; // 禁用按鈕
+
+            // 獲取所有選中的複選框
+            let selectedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                                        .map(option => option.value);
+
+            // 正確答案
+            let correctAnswers = ["A", "C"];
+
+            // 判斷是否有選擇
+            let feedback_four = document.getElementById("feedback_four");
+            if (selectedOptions.length === 0) {
+                feedback.innerHTML = "請至少選擇一個選項！";
+                button_four.disabled = false; // 恢復按鈕
+                return;
+            }
+
+            // 顯示使用者選擇的結果
+            // feedback.innerHTML = `你選擇了: ${selectedOptions.join(", ")}`;
+
+            // 比對正確答案
+            if (selectedOptions.sort().join(",") === correctAnswers.sort().join(",")) {
+                feedback_four.innerHTML = `${check_yes_ro_no[0]}`;
+            } else {
+                feedback_four.innerHTML = `${check_yes_ro_no[1]}`;
+            }
+        }
+        function correct_problem_five() {
+            let button_five = document.getElementById("button_five");
+            button_five.disabled = true; // 禁用按鈕
+
+            // 獲取所有選中的複選框
+            let selectedOptions = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
+                                        .map(option => option.value);
+
+            // 正確答案
+            let correctAnswers = ["B"];
+
+            // 判斷是否有選擇
+            let feedback_five = document.getElementById("feedback_five");
+            if (selectedOptions.length === 0) {
+                feedback.innerHTML = "請至少選擇一個選項！";
+                button_five.disabled = false; // 恢復按鈕
+                return;
+            }
+
+            // 顯示使用者選擇的結果
+            // feedback.innerHTML = `你選擇了: ${selectedOptions.join(", ")}`;
+
+            // 比對正確答案
+            if (selectedOptions.sort().join(",") === correctAnswers.sort().join(",")) {
+                feedback_five.innerHTML = `${check_yes_ro_no[0]}`;
+            } else {
+                feedback_five.innerHTML = `${check_yes_ro_no[1]}`;
+            }
+        }
+
+    </script>
+    <head>
+
+    </head>
+    <body onload = "initial();">
+        <h1>平行四邊形面積測驗</h1>
+        
+        <!-- <input type = "checkbox" value = "10">10
+        <input type = "checkbox" value = "20">20 -->
+        <span>註:每個格子邊長為1cm</span>
+        <table border="3">
+            <tr style="text-align: center; vertical-align: middle;">
+                <td style = "width : 20%;">第一題</td>
+                <td style = "width : 80%;">
+                    <!-- <span id = "question_one"></span> -->
+                    <span>下列平行四邊形的面積為多少?</span><br>
+                    <canvas id="myCanvas1" width="500" height="200" style="border:1px solid #000;"></canvas><br>
+                    <input type = "radio" name = "p1" value = "7">7 &nbsp;
+                    <input type = "radio" name = "p1" value = "14">14 &nbsp;
+                    <input type = "radio" name = "p1" value = "21">21 &nbsp;
+                    <button id = "button_one" onclick = "correct_problem_one();">確認</button> &nbsp;
+                    <span id = "feedback_one"></span>
+                </td>
+            </tr>
+            <tr style="text-align: center; vertical-align: middle;">
+                <td style = "width : 20%;">第二題</td>
+                <td style = "width : 80%;">
+                    <!-- <span id = "question_two"></span> -->
+                    <span>下列平行四邊形的面積為多少?</span><br>
+                    <canvas id="myCanvas2" width="500" height="200" style="border:1px solid #000;"></canvas><br>
+                    <textarea id = "user_answer_two" placeholder = "輸入平行四邊形面積(只需輸入數字)"></textarea>
+                    <button id = "button_two" onclick = "correct_problem_two();">確定</button> &nbsp;
+                    <span id = "feedback_two"></span>
+                </td>
+            </tr>
+            <tr style="text-align: center; vertical-align: middle;">
+                <td style = "width : 20%;">第三題</td>
+                <td style = "width : 80%;">
+                    <!-- <span id = "question_two"></span> -->
+                    <span>下列哪些圖形面積為12cm^2?</span><br>
+                    <canvas id="myCanvas3_1" width="640" height="100" style="border:1px solid #000; float : left;"></canvas><br>
+                    <!-- <canvas id="myCanvas3_2" width="160" height="100" style="border:1px solid #000; float : middle;"></canvas><br>
+                    <canvas id="myCanvas3_3" width="500" height="200" style="border:1px solid #000;"></canvas><br> -->
+                    <br>
+                    <select id="user_answer_three" multiple size="3">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                    <button id="button_three" onclick="correct_problem_three();">確定</button>
+                    <span id="feedback_three"></span>
+                </td>
+            </tr>
+            <tr style="text-align: center; vertical-align: middle;">
+                <td style = "width : 20%;">第四題</td>
+                <td style = "width : 80%;">
+                    <!-- <span id = "question_two"></span> -->
+                    <span>下列哪些底與高所構成的平行四邊形面積相同?</span><br>
+                    <label><input type = "checkbox" value = "A">底 : 5cm, 高 : 6cm</label><br>
+                    <label><input type = "checkbox" value = "B">底 : 19cm, 高 : 2cm</label><br>
+                    <label><input type = "checkbox" value = "C">底 : 1cm, 高 : 30cm</label><br>
+                    <button id="button_four" onclick="correct_problem_four();">確定</button>
+                    <span id="feedback_four"></span>
+                </td>
+            </tr>
+            <tr style="text-align: center; vertical-align: middle;">
+                <td style = "width : 20%;">第五題</td>
+                <td style = "width : 80%;">
+                    <!-- <span id = "question_two"></span> -->
+                    <span>有一個平行四邊形的圖形，底為5cm，高為9cm，請問此平行四邊形的面積為多少?</span><br>
+                    <label><input type = "checkbox" value = "A">35cm^2</label><br>
+                    <label><input type = "checkbox" value = "B">45cm^2</label><br>
+                    <label><input type = "checkbox" value = "C">55cm^2</label><br>
+                    <button id="button_five" onclick="correct_problem_five();">確定</button>
+                    <span id="feedback_five"></span>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+<script>
+function changestyle(){
+ var s1=document.getElementById("p1");
+ s1.style="color:red; background-color:yellow;";
+}
+
+function hide(){
+document.getElementById("test").innerHTML.style.display="none";
+}
+var sc=0;
+function showv(){
+ var ans=[1,0,1];
+ var n1=document.getElementsByName("sel");//.length
+ for(var i=0;i<=n1.length-1;i++) {
+     alert(n1[i].value);
+    //alert(document.getElementsByName("sel")[i].value);
+  //if ((n1[i].type == 'radio' && n1[i].checked == true) && (ans[i]==1)) sc+=5; 
+  if (n1[i].checked && ans[i]==1) sc+=5; 
+}
+   alert(sc);
+}
+function showv2(){
+ var ans=[0,0,1];
+ var n2=document.getElementsByName("sel2");//.length
+ for(var i=0;i<=n2.length-1;i++) {
+     alert(n2[i].value);
+    //if ((n2[i].type == 'checkbox' && n2[i].checked ) && (ans[i]==1)) sc+=5;
+    if ( n2[i].checked && ans[i]==1) sc+=5;
+  }
+  alert(sc);
+}
+</script>
+<body>
+<p id=p1>Welcome to Challenge<button onclick="changestyle();">change</button></p>
+which are primitive variables?
+<input type=checkbox name=sel value='int'>int
+<input type=checkbox name=sel value='string'>String
+<input type=checkbox name=sel value='float'>float
+<button onclick="showv();">sheck</button><br>
+容量最大data type?
+<input type=radio name=sel2 value='int'>int
+<input type=radio name=sel2 value='string'>char
+<input type=radio name=sel2 value='Double'>double
+[<a href="javascript:showv2();">check</a>] <br>
+</body></html>
+

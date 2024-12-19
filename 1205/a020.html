@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>限時作答挑戰(隨機出題)</title>
+    </head>
+    <script>
+        let the_problem_counter = 0;
+        let current_problem_type = 0; // 這個變數用來存儲當前題型
+
+        function initial() {
+            let the_count_of_problem = document.getElementById("the_count_of_problem");
+            the_problem_counter++;
+            the_count_of_problem.innerHTML = `第${the_problem_counter}題`;
+            generate_problem(); // 隨機生成題型
+        }
+
+        function generate_problem() {
+            // 隨機選擇題型 (例如 0 為題型1, 1 為題型2)
+            // current_problem_type = Math.floor(Math.random() * 2);
+            current_problem_type = 1;
+            if (current_problem_type === 0) {
+                problem_one_area_comparison();
+            } else {
+                problem_two_area_comparison();
+            }
+        }
+
+        function problem_one_area_comparison() {
+            document.getElementById("problem_one").style.display = "block";
+            document.getElementById("problem_two").style.display = "none";
+
+            alert("題型1");
+            let baseArea = Math.floor(Math.random() * 50) + 10;
+            let rectangles = [];
+            let hasCorrectAnswer = false;
+
+            for (let i = 0; i < 3; i++) {
+                let length = Math.floor(Math.random() * 10) + 1;
+                let width = Math.floor(Math.random() * 10) + 1;
+                let area = length * width;
+                rectangles.push({ length, width, area });
+
+                if (area < baseArea) {
+                    hasCorrectAnswer = true;
+                }
+            }
+
+            if (!hasCorrectAnswer) {
+                let randomIndex = Math.floor(Math.random() * 3);
+                let rect = rectangles[randomIndex];
+                let newArea = baseArea - Math.floor(Math.random() * 5) - 1;
+                rect.area = newArea;
+                rect.length = Math.floor(newArea / 2);
+                rect.width = newArea - rect.length;
+            }
+
+            document.getElementById("one_type").innerHTML = 
+                `以下矩形的長和寬中，哪些面積小於 ${baseArea}?`;
+
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            for (let i = 0; i < rectangles.length; i++) {
+                let rect = rectangles[i];
+                checkboxes[i].value = rect.area < baseArea ? "true" : "false";
+                checkboxes[i].checked = false;
+                checkboxes[i].nextSibling.nodeValue = 
+                    ` 長: ${rect.length} cm, 寬: ${rect.width} cm`;
+            }
+        }
+        let answer_two_type;
+        function problem_two_area_comparison() {
+            document.getElementById("problem_one").style.display = "none";
+            document.getElementById("problem_two").style.display = "block";
+            let canvas = document.getElementById("myCanvas1");
+            let print = canvas.getContext("2d");
+            canvas.width = canvas.width;
+            // test
+            // 3, 2 10, 2 10, 4 3, 4 3, 2
+            print.beginPath();
+            print.lineWidth = 5;
+            let random_number_problem_two_x = Math.floor(Math.random() * 9) + 1;
+            let random_number_problem_two_y = Math.floor(Math.random() * 3) + 1;
+            // alert(random_number_problem_two_x);
+            // alert(random_number_problem_two_y);
+
+            answer_two_type = random_number_problem_two_x * random_number_problem_two_y;
+            // let radom_the_index = Math.floor(Math.random() * 3) + 1;
+            // let string = `problem_option_${answer_two_type}`;
+            // let correct_answer = document.getElementById(string);
+            // correct_answer.innerHTML = `${answer_two_type}`;
+            let d = Math.floor(Math.random() * 2) + 1;
+            let a = 4;
+            let b = 2;
+            print.moveTo(a * 25, b * 25);
+            print.lineTo((a + random_number_problem_two_x) * 25, 2 * 25);
+            print.lineTo((a + random_number_problem_two_x - d) * 25, (b + random_number_problem_two_y) * 25);
+            print.lineTo((a - d)* 25, (b + random_number_problem_two_y) * 25);
+            print.lineTo(a * 25, b * 25);
+
+            // print.lineTo(4 * 25, 3 * 25);
+            // print.lineTo(3 * 25, 2 * 25);
+            print.strokeStyle = "#8600FF";
+            print.stroke();
+            
+            print.fillStyle = "#FFD0FF";
+            print.fill();
+            print.lineWidth = 1;
+            // Grid lines
+            print.strokeStyle = "#cccccc";
+            for (let i = 25; i <= 400; i += 25) {
+                print.beginPath();
+                print.moveTo(i, 50);
+                print.lineTo(i, 150);
+                print.stroke();
+            }
+            for (let j = 50; j <= 150; j += 25) {
+                print.beginPath();
+                print.moveTo(25, j);
+                print.lineTo(400, j);
+                print.stroke();
+            }
+            print.fillStyle = "#000000";
+            print.font = "16px Arial";
+            print.fillText("1 cm", 16 * 25 + 12.5, 6 * 25 - 5);
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+            // Draw brackets
+            print.beginPath();
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // Right bracket
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // Upward arc
+            print.strokeStyle = "#000000";
+            print.stroke();
+        }
+
+        function check_answer() {
+            if(current_problem_type === 0){
+                let checkboxes = document.querySelectorAll("input[type='checkbox']");
+                let feedback = document.getElementById("feedback_five");
+                let allCorrect = true;
+                let answered = false;
+
+                for (let checkbox of checkboxes) {
+                    if (checkbox.checked) {
+                        answered = true;
+                        if (checkbox.value !== "true") {
+                            allCorrect = false;
+                        }
+                    } else if (checkbox.value === "true") {
+                        allCorrect = false;
+                    }
+                }
+
+                if (!answered) {
+                    feedback.innerHTML = "請至少選擇一個答案！";
+                } else if (allCorrect) {
+                    feedback.innerHTML = "正確！";
+                } else {
+                    feedback.innerHTML = "錯誤！請再試一次！";
+                }
+            }
+            else if(current_problem_type === 1){
+                let user_answer_two = document.getElementById("user_answer_two").value;
+                // alert(user_answer_two);
+                let feedback = document.getElementById("feedback_two");
+                // alert(answer_two_type); 
+                if(user_answer_two == answer_two_type){
+                    feedback.innerHTML = "正確！";
+                }    
+                else{
+                    feedback.innerHTML = "錯誤！請再試一次！";
+                }
+            }
+        }
+
+        function next_question() {
+            let the_count_of_problem = document.getElementById("the_count_of_problem");
+            the_problem_counter++;
+            the_count_of_problem.innerHTML = `第${the_problem_counter}題`;
+            generate_problem(); // 隨機生成題型
+        }
+    </script>
+    <body onload="initial();">
+        <div>
+            <label for="timeInput">選擇計時時間 (分鐘): </label>
+            <input type="number" id="timeInput" min="1" value="3" />
+        </div>
+    
+        <div id="timerDisplay">03:00</div>
+    
+        <button id="startBtn">開始</button>
+        <button id="pauseBtn" disabled>暫停</button>
+        <button id="stopBtn" disabled>結束</button>
+    
+        <script>
+            let timer;
+            let minutes = 0;
+            let seconds = 0;
+            let isRunning = false;
+    
+            const timerDisplay = document.getElementById("timerDisplay");
+            const startBtn = document.getElementById("startBtn");
+            const pauseBtn = document.getElementById("pauseBtn");
+            const stopBtn = document.getElementById("stopBtn");
+            const timeInput = document.getElementById("timeInput");
+    
+            startBtn.addEventListener("click", startTimer);
+            pauseBtn.addEventListener("click", pauseTimer);
+            stopBtn.addEventListener("click", stopTimer);
+    
+            function startTimer() {
+                if (!isRunning) {
+                    minutes = parseInt(timeInput.value);
+                    seconds = 0;
+                    updateDisplay();
+                    isRunning = true;
+                    startBtn.disabled = true;
+                    pauseBtn.disabled = false;
+                    stopBtn.disabled = false;
+    
+                    timer = setInterval(function() {
+                        if (seconds === 0) {
+                            if (minutes === 0) {
+                                clearInterval(timer);
+                                alert("時間到!");
+                                stopTimer();
+                            } else {
+                                minutes--;
+                                seconds = 59;
+                            }
+                        } else {
+                            seconds--;
+                        }
+                        updateDisplay();
+                    }, 1000);
+                }
+            }
+    
+            function pauseTimer() {
+                if (isRunning) {
+                    clearInterval(timer);
+                    isRunning = false;
+                    startBtn.disabled = false;
+                    pauseBtn.disabled = true;
+                }
+            }
+    
+            function stopTimer() {
+                clearInterval(timer);
+                isRunning = false;
+                minutes = 0;
+                seconds = 0;
+                updateDisplay();
+                startBtn.disabled = false;
+                pauseBtn.disabled = true;
+                stopBtn.disabled = true;
+            }
+    
+            function updateDisplay() {
+                const minuteStr = minutes < 10 ? "0" + minutes : minutes;
+                const secondStr = seconds < 10 ? "0" + seconds : seconds;
+                timerDisplay.innerHTML = `${minuteStr}:${secondStr}`;
+            }
+        </script>
+    
+        <table border="3">
+            <tr>
+                <td>
+                    <span id="the_count_of_problem"></span>
+                </td>
+            </tr>
+            <tr id = "problem_one">
+                <td>
+                    <span id="one_type"></span><br>
+                    <label><input type="checkbox"> </label><br>
+                    <label><input type="checkbox"> </label><br>
+                    <label><input type="checkbox"> </label><br>
+                    <button onclick="check_answer();">確定</button>
+                    <span id="feedback_five"></span><br>
+                    <button onclick="next_question();">下一題</button>
+                </td>
+            </tr>
+            <tr id = "problem_two">
+                <td>
+                    <span id="one_type"></span><br>
+                    <canvas id="myCanvas1" width="500" height="200" style="border:1px solid #000;"></canvas><br>
+                    <input type = "text" placeholder = "請輸入答案" id = "user_answer_two">
+                    <button onclick="check_answer();">確定</button>
+                    <span id="feedback_two"></span><br>
+                    <button onclick="next_question();">下一題</button>
+                </td>
+            </tr>
+        </table>
+        
+    </body>
+</html>

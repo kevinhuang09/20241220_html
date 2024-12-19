@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .focus {
+                background-color: coral;
+            }
+            .reset {
+                background-color: white;
+            }
+            span {
+                font-family: 標楷體;
+                font-size: 25px;
+            }
+        </style>
+        <script>
+            function initial() {
+                let string_one = (document.getElementById("string_one").innerHTML = `解題教學<br><br>`);
+                let string_two = (document.getElementById("string_two").innerHTML = `第一步 : 先計算出長方形甲的面積，寬為4cm，長為4cm<br><br>`);
+                let string_three = (document.getElementById("string_three").innerHTML = `第二步 : 面積的公式為 - > 長 乘以 寬，先計算出長方形甲的面積<br><br>`);
+                let string_four = (document.getElementById("string_four").innerHTML = `第三步 : 用公式計算出長方形甲的面積 -> 面積 = 4cm * 4cm = 16cm^2<br><br>`);
+                let string_five = (document.getElementById("string_five").innerHTML = `第四步 : 將平行四邊形左邊多出的三角形，移動到平行四邊形右邊<br><br>`);
+                let string_six = (document.getElementById("string_six").innerHTML = `第五步 : 經過移動後，可以觀察到變成一個跟甲一樣的長方形<br><br>`);
+                let string_seven = (document.getElementById("string_seven").innerHTML = `第六步 : 所以面積與甲相同，乙面積為16cm^2<br><br>`);
+            }
+            let css = ["focus", "reset"];
+            let count_step = 1;
+
+            function step() {
+                // count_step = 1;
+                switch (count_step) {
+                    case 1:
+                        document.getElementById("string_one").classList.add(css[0]);
+                        count_step++;
+                        break;
+                    case 2:
+                        document.getElementById("string_one").classList.remove(css[0]);
+                        document.getElementById("string_two").classList.add(css[0]);
+                        drawLines();
+                        count_step++;
+                        break;
+                    case 3:
+                        document.getElementById("string_two").classList.remove(css[0]);
+                        document.getElementById("string_three").classList.add(css[0]);
+                        count_step++;
+                        break;
+                    case 4:
+                        document.getElementById("string_three").classList.remove(css[0]);
+                        document.getElementById("string_four").classList.add(css[0]);
+                        count_step++;
+                        break;
+                    case 5:
+                        document.getElementById("string_four").classList.remove(css[0]);
+                        document.getElementById("string_five").classList.add(css[0]);
+                        drawLine_two();
+                        count_step++;
+                        break;
+                    case 6: 
+                        document.getElementById("string_five").classList.remove(css[0]);
+                        document.getElementById("string_six").classList.add(css[0]);
+                        drawLine_three();
+                        count_step++;
+                        break;
+                    case 7: 
+                        document.getElementById("string_six").classList.remove(css[0]);
+                        document.getElementById("string_seven").classList.add(css[0]);
+                        // drawLine_two();
+                        count_step++;
+                        break;
+                    case 8: 
+                        document.getElementById("string_seven").classList.remove(css[0]);
+                        // document.getElementById("string_four").classList.add(css[0]);
+                        count_step++;
+                        alert("本題教學結束");
+                        break;
+                }
+            }
+            let count_step2 = 1;
+            let interval;
+
+            function auto_display() {
+                // count_step2 = 1;
+                interval = setInterval(function() {
+                    switch (count_step2) {
+                        case 1:
+                            document.getElementById("string_one").classList.add(css[0]);
+                            count_step2++;
+                            break;
+                        case 2:
+                            document.getElementById("string_one").classList.remove(css[0]);
+                            document.getElementById("string_two").classList.add(css[0]);
+                            drawLines();
+                            count_step2++;
+                            break;
+                        case 3:
+                            document.getElementById("string_two").classList.remove(css[0]);
+                            document.getElementById("string_three").classList.add(css[0]);
+                            count_step2++;
+                            break;
+                        case 4:
+                            document.getElementById("string_three").classList.remove(css[0]);
+                            document.getElementById("string_four").classList.add(css[0]);
+                            count_step2++;
+                            break;
+                        case 5:
+                            document.getElementById("string_four").classList.remove(css[0]);
+                            document.getElementById("string_five").classList.add(css[0]);
+                            drawLine_two();
+                            count_step2++;
+                            break;
+                        case 6:
+                            document.getElementById("string_five").classList.remove(css[0]);
+                            document.getElementById("string_six").classList.add(css[0]);
+                            drawLine_three();
+                            count_step2++;
+                            break;
+                        case 7:
+                            document.getElementById("string_six").classList.remove(css[0]);
+                            document.getElementById("string_seven").classList.add(css[0]);
+                            count_step2++;
+                            break;
+                        case 8:
+                            document.getElementById("string_seven").classList.remove(css[0]);
+                            count_step2++;
+                            alert("本題教學結束");
+                            clearInterval(interval); // 清除 setInterval
+                            break;
+                    }
+                }, 1000); // 每 1 秒執行一次
+            }
+
+            function drawLines() {
+                let canvas = document.getElementById("myCanvas");
+                let print = canvas.getContext("2d");
+
+                // 繪製斜率為 45° 的直線
+                // 
+                print.beginPath();
+                // 2, 2 - 2, 6
+                print.moveTo(2 * 25 + 5, 2 * 25 - 5);
+                print.lineTo(2 * 25, 2 * 25);
+                print.lineTo(6 * 25, 2 * 25);
+                print.lineTo(6 * 25 - 5, 2 * 25 - 5);
+                print.strokeStyle = "	#00AEAE";
+                print.stroke();
+
+                print.beginPath();
+                // 2, 2 - 2, 6
+                print.moveTo(2 * 25 - 5, 2 * 25 + 5);
+                print.lineTo(2 * 25, 2 * 25);
+                print.lineTo(2 * 25, 6 * 25);
+                print.lineTo(2 * 25 - 5, 6 * 25 - 5);
+                print.strokeStyle = "	#0080FF";
+                print.stroke();
+
+                print.font = "16px Arial";
+                print.fillText("4 cm", 100 - 12.5, 50 - 12.5);
+                print.fillText("4 cm", 12.5, 100 + 7);
+                // draw 乙 
+                    // test(9, 2)
+                // print.beginPath();
+                // print.moveTo(8 * 25, 2 * 25);
+                // print.lineTo(10 * 25, 2 * 25);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(8 * 25, 6 * 25);
+                // print.lineTo(10 * 25, 6 * 25);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(9 * 25, 2 * 25);
+                // print.lineTo(9 * 25, 6 * 25);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(9 * 25, 2 * 25);
+                // print.lineTo(9 * 25 - 5, 2 * 25 + 5);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // print.beginPath();
+                // print.moveTo(9 * 25, 6 * 25);
+                // print.lineTo(9 * 25 - 5, 6 * 25 - 5);
+                // print.strokeStyle = "#921AFF";
+                // print.stroke();
+
+                // // Text
+                // print.font = "16px Arial";
+                // print.fillStyle = "#00AEAE";
+                // print.fillText("4cm", 9 * 25, 4 * 25);
+                // // print.fillText("乙", 265, 110);
+
+                // print.beginPath();
+                // print.moveTo(14 * 25 - 5, 2 * 25 - 5);
+                // print.lineTo(14 * 25, 2 * 25);
+                // print.lineTo(10 * 25, 2 * 25);
+                // print.lineTo(10 * 25 + 5, 2 * 25 - 5);
+                // print.strokeStyle = "#FF79BC	";
+                // print.stroke();
+                
+                // print.font = "16px Arial";
+                // print.fillText("4 cm", 12 * 25 - 12, 2 * 25);
+                // 8, 6 10, 6 10 ,2
+                
+            }
+            function drawLine_two(){
+                // 乙圖步驟一
+                print.beginPath();
+                print.moveTo(8 * 25, 6 * 25);
+                print.lineTo(10 * 25, 6 * 25);
+                print.lineTo(10 * 25, 2 * 25);
+                print.lineTo(8 * 25, 6 * 25);
+                print.strokeStyle = "#E1E100";
+                print.stroke();
+
+                // test
+                let patternCanvas = document.createElement("canvas");
+                patternCanvas.width = 10;
+                patternCanvas.height = 10;
+                let patternCtx = patternCanvas.getContext("2d");
+                patternCtx.strokeStyle = "#E1E100";
+                patternCtx.lineWidth = 2;
+                patternCtx.beginPath();
+                patternCtx.moveTo(0, 10);
+                patternCtx.lineTo(10, 0);
+                patternCtx.stroke();
+                let pattern = print.createPattern(patternCanvas, "repeat");
+
+                print.beginPath();
+                print.moveTo(8 * 25, 6 * 25);
+                print.lineTo(10 * 25, 6 * 25);
+                print.lineTo(10 * 25, 2 * 25);
+                print.closePath();
+                print.fillStyle = pattern;
+                print.fill();
+                print.strokeStyle = "#E1E100";
+                print.stroke();
+
+
+                // 乙圖步驟二
+                print.beginPath();
+                print.moveTo(12 * 25, 6 * 25);
+                print.lineTo(14 * 25, 6 * 25);
+                print.lineTo(14 * 25, 2 * 25);
+                print.lineTo(12 * 25, 6 * 25);
+                print.strokeStyle = "	#FFAF60";
+                print.stroke();
+                print.closePath();
+                print.fillStyle = "		#FFAF60";
+                print.fill();
+
+                // 乙圖步驟三
+                // 10 - 14 3
+                print.beginPath();
+                print.moveTo(10 * 25 - 5, 2 * 25 + 23 + 1);
+                print.lineTo(10 * 25 - 5, 4 * 25 - 23 + 1);
+                print.lineTo(14 * 25 - 10, 4 * 25 - 23 + 1);
+                print.lineTo(14 * 25 - 10, 2 * 25 + 23 + 1);
+                print.lineTo(10 * 25 - 5, 2 * 25 + 23 + 1);
+                print.strokeStyle = "#A6FFFF";
+                print.stroke();
+                print.fillStyle = "#A6FFFF";
+                print.fill();
+
+                print.beginPath();
+                print.moveTo(14 * 25 - 10, 4 * 25 - 23);
+                print.lineTo(14 * 25 - 10 - 10, 4 * 25 - 23 - 10);
+                
+                print.lineTo(14 * 25  - 10 - 9, 4 * 25 - 23 - 10);
+                print.lineTo(14 * 25  - 9, 4 * 25 - 23);
+
+                print.strokeStyle = "#A6FFFF";
+                print.stroke();
+
+                print.beginPath();
+                print.moveTo(14 * 25 - 10, 4 * 25 - 23);
+                print.lineTo(14 * 25 - 10 - 10, 4 * 25 - 23 + 10);
+                
+                print.lineTo(14 * 25 - 11 - 10, 4 * 25 - 23 + 10);
+                print.lineTo(14 * 25 - 11, 4 * 25 - 23);
+                print.strokeStyle = "#A6FFFF";
+                print.stroke();
+            }
+            function drawLine_three(){
+                // test 10 - 14 2 - 6
+                print.beginPath();
+                print.moveTo(10 * 25, 2 * 25);
+                print.lineTo(10 * 25, 6 * 25);
+                print.lineTo(14 * 25, 6 * 25);
+                print.lineTo(14 * 25, 2 * 25);
+                print.lineTo(10 * 25, 2 * 25);
+                print.strokeStyle = "#467500	";
+                print.stroke();
+                // test
+                // print.clearRect(8 * 25 - 5, 2 * 25 - 5, 2 * 25 + 10, 4 * 25 + 10);
+
+            }
+            function reset_the_display(){
+                count_step = 1;
+                count_step2 = 1;
+                document.getElementById("string_one").classList.remove(css[0]);
+                document.getElementById("string_two").classList.remove(css[0]);
+                document.getElementById("string_three").classList.remove(css[0]);
+                document.getElementById("string_four").classList.remove(css[0]);
+                document.getElementById("string_five").classList.remove(css[0]);
+                document.getElementById("string_six").classList.remove(css[0]);
+                document.getElementById("string_seven").classList.remove(css[0]);
+
+            }
+            function read_the_content(){
+                let content = document.getElementById("content_one").innerText;
+                const speech = new SpeechSynthesisUtterance(content);
+                speech.lang = "zh-TW";
+                window.speechSynthesis.speak(speech);
+            }
+            function stop_reading(){
+                window.speechSynthesis.cancel();
+            }
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
+    </head>
+    <body onload="initial();">
+        <h1>平行四邊形面積計算教學</h1>
+        <button style="float: right;" class="btn btn-primary" onclick = "window.location.href = 'a013.html'">返回主選單</button>
+        <hr />
+        <h2>範例1 : </h2>
+        <canvas id="myCanvas" width="500" height="200" style="border:1px solid #000;"></canvas>
+        <hr />
+
+        <!-- Section for 解題教學 -->
+        <button onclick="step();" class="btn btn-primary">下一步</button>
+        <button onclick = "auto_display();" class="btn btn-primary">自動撥放</button>
+        <br><br>
+        <div class="d-flex justify-content-left gap-2">
+            <button onclick="read_the_content();" class="btn btn-primary">朗讀</button>
+            <button onclick="stop_reading();" class="btn btn-danger">朗讀停止</button>
+        </div>
+        <span id = "content_one" style = "display: none;">
+            第一步 : 先計算出長方形甲的面積，寬為4cm，長為4cm
+            第二步 : 面積的公式為 - > 長 乘以 寬，先計算出長方形甲的面積
+            第三步 : 用公式計算出長方形甲的面積 -> 面積 = 4cm * 4cm = 16cm^2
+            第四步 : 將平行四邊形左邊多出的三角形，移動到平行四邊形右邊
+            第五步 : 經過移動後，可以觀察到變成一個跟甲一樣的長方形
+            第六步 : 所以面積與甲相同，乙面積為16cm^2
+        </span>
+        <!-- <button onclick = "reset_the_display();" class="btn btn-primary">重置</button> -->
+        <span id="string_one"></span>
+        <span id="string_two"></span>
+        <span id="string_three"></span>
+        <span id="string_four"></span>
+        <span id = "string_five"></span>
+        <span id = "string_six"></span>
+        <span id = "string_seven"></span>
+
+        <!-- Section for Canvas -->
+        <script>
+            let canvas = document.getElementById("myCanvas");
+            let print = canvas.getContext("2d");
+
+            // Picture one
+            print.fillStyle = "#fffacd";
+            print.fillRect(50, 50, 100, 100);
+
+            // Picture two
+            print.moveTo(250, 50);
+            print.lineTo(200, 150);
+            print.lineTo(300, 150);
+            print.lineTo(350, 50);
+            print.fill();
+
+            // Grid lines
+            print.strokeStyle = "#cccccc";
+            for (let i = 25; i <= 400; i += 25) {
+                print.beginPath();
+                print.moveTo(i, 50);
+                print.lineTo(i, 150);
+                print.stroke();
+            }
+            for (let j = 50; j <= 150; j += 25) {
+                print.beginPath();
+                print.moveTo(25, j);
+                print.lineTo(400, j);
+                print.stroke();
+            }
+
+            // Text
+            print.font = "20px Arial";
+            print.fillStyle = "#000000";
+            print.fillText("甲", 90, 110);
+            print.fillText("乙", 265, 110);
+
+            // Draw brackets
+            print.beginPath();
+            print.arc(16 * 25, 6 * 25 - 12.5, 10, 1.5 * Math.PI, 0.5 * Math.PI); // Right bracket
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            print.beginPath();
+            print.arc(16 * 25 - 12.5, 6 * 25 - 12.5 + 12.5, 10, 0, Math.PI); // Upward arc
+            print.strokeStyle = "#000000";
+            print.stroke();
+
+            // test
+            // // 繪製斜率為 45° 的直線
+            // print.beginPath();
+            // print.moveTo(25 * 6, 50); // 起始點 (0, 0)
+            // print.lineTo(25 * 6 - 5, 45); // 終點 (100, 100)，斜率為 45°，所以 y = x
+            // print.strokeStyle = "#000000"; // 顏色為黑色
+            // print.stroke();
+            // test (10, 2) - (14, 2)
+            
+            // print.beginPath();
+            // print.moveTo(50, 50); // 起始點 (0, 0)
+            // print.lineTo(50 + 5, 50 - 5); // 終點 (100, 100)，斜率為 45°，所以 y = x
+            // print.strokeStyle = "#000000"; // 顏色為黑色
+            // print.stroke();
+
+            
+
+            // Additional text
+            print.font = "16px Arial";
+            print.fillText("1 cm", 16 * 25 + 12.5, 6 * 25 - 5);
+            print.fillText("1 cm", 15 * 25, 7 * 25);
+
+            // // test 10 - 14 2 - 6
+            // print.beginPath();
+            // print.moveTo(10 * 25, 2 * 25);
+            // print.lineTo(10 * 25, 6 * 25);
+            // print.lineTo(14 * 25, 6 * 25);
+            // print.lineTo(14 * 25, 2 * 25);
+            // print.lineTo(10 * 25, 2 * 25);
+            // print.strokeStyle = "#467500	";
+            // print.stroke();
+
+            
+        </script>
+    </body>
+</html>
